@@ -18,3 +18,39 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+@import 'partials/welcome';
+@import 'partials/home';
+
+
+
+
+/*@import url(http://fonts.googleapis.com/css?family=Nunito:400,700);*/
+@import url(http://fonts.googleapis.com/css?family=Poiret+One);
+
+/*UBUNTU */
+@import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic,700italic);
+
+/* INDIE - Feito a mao */
+/*@import url(http://fonts.googleapis.com/css?family=Indie+Flower);
+*/
+
+
+
+h1 {
+font-family: 'Poiret One', cursive;
+font-weight: bold;
+}
+
+
+h4 {
+  font-family: 'Ubuntu Mono', cursive;
+
+}
+
+
+
+
+
+
+

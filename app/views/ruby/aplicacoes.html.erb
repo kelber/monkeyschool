@@ -1,0 +1,35 @@
+<%= render partial: 'layouts/navbar' %>
+
+<div class="well">
+	<h1>Passo a Passo para criação de uma aplicação</h1>
+</div>
+	<%= link_to 'Voltar', home_index_path, class: "btn btn-default" %>
+<hr>
+
+	<h1>Criando aplicação Xinga Ai</h1>
+
+	<h4><kbd>Preparando a aplicacao no Prompt</kbd></h4>
+	
+<div class="well">
+		<p>rails new xingaai</p>
+		<p>rails g model Post title:string  description:text</p>
+		<p>rails g controller Posts </p>
+		<p>rake db:migrate</p>
+</div>
+<p>1 - rails new nomedoaplicativo -> para criar a aplicacao deve-se chamar desta maneira</p>
+	<p>2 - rails g model -> O Model é responsavel pelo banco de dados( nao somente isto ), mas pense assim. ele deve ser seguido do nome do que se quer criar no caso um post(igual ao twitter) seguido dos campos que serão criados no banco de dados. no caso title:string  é o titulo (string) é a representacao de letras e numero caracteres.  description:text é a descricao:formato texto
+	o </p>
+	<p>rails g controller:  </p>
+	<H3>Termino aqui. agora vou fazer somente codigos</H3>
+	<hr>
+
+
+<div class="well">
+<h4><kbd>Routes</kbd></h4>
+	<p>root 'posts#index'<br>
+			resources :posts do <Br>
+				resources :comments<Br>
+			end
+	</p>
+</div>
+
