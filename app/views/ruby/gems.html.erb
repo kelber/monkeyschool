@@ -1,0 +1,70 @@
+<div class="container">
+
+<%= render partial: 'layouts/navbar' %>
+	<h1>Hello Gems</h1>
+
+	<h3>Gem Raty <i class="fa fa-heart"></i><i class="fa fa-heart-o"></i><i class="fa fa-heart-o"></i></h3>
+	
+	<hr>
+
+	<p>Download the js</p>
+	<p>3Ximagens star-half.png , star-off.png, star-on.png</p>
+	<p>jquery.js</p>
+
+	<div class="well">
+	<p>< div class="star-rating" data-score=< %= review.rating %>< /div></p>
+
+	<p>Final da pagina adicionar Javascript</p>
+	<p>
+	 < script type="text/javascript" ><br>
+	<p>$('.star-rating').raty({<br>
+		path: '/assets/', <br>
+		readOnly: true, <br>
+		score: function() { <Br>
+			return $(this).attr('data-score');
+			}<Br>
+	}); <Br>
+	</ script>
+
+	<p><kbd>New (_form)</kbd></p>
+	<p>
+		< div id="star-rating">
+	</p>
+
+	<p>
+			 < script type="text/javascript" ><br>
+	<p>$('.star-rating').raty({<br>
+		path: '/assets/', <br>
+		scoreName: 'review[rating]'<br>
+		}); <br>
+	</p>
+
+	<p>movie_controller</p>
+	<p>
+	def show<Br>
+    @reviews = Review.where(movie_id: @movie.id).order("created_at DESC")<BR>
+
+    if @reviews.blank?<br>
+      @avg_review = 0<br>
+    else<br>
+      @avg_review = @reviews.average(:rating).round(2)<br>
+    end<br>
+  end<br>
+	</p>
+
+</div>
+
+	<h3>Masonry-Rails</h3>
+	<div class="well">
+	<p>colar no aplication.js embaixo jquery <pre>//= require masonry/jquery.masonry</pre> </p>
+	<p>No arquivo q for usar. post.js.coffee</p>
+	<p>$ -> <br>
+			$('#posts').imageLoaded ->  <br>
+				$('#posts').masonry   <Br>
+				itemSelector: '.box'   <br>
+				isFitWidth: true  </p>
+
+
+
+
+	</div>

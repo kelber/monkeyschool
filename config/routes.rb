@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'github/index'
+
   devise_for :users
 	# ATENCAO SE COLOCAR resources ele SÓ FUNCIONA ROTAS RESTful 
   
@@ -15,21 +17,21 @@ Rails.application.routes.draw do
 
   get 'ruby/index'
   get 'ruby/aplicacoes'
+  get 'ruby/gems'
 
  
 ##############################################################
 # Aplicacao xingaAi
 #
-  resources :posts do
+
+
+  resources :posts do 
     member do
     get "like", to: "posts#upvote"
     get "dislike", to: "posts#downvote"
     end
   	resources :comments , dependent: :destroy
   end
-
-
-
 
 
 

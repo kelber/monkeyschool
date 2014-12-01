@@ -8,6 +8,8 @@ class PostsController < ApplicationController
 		@posts = Post.all.order("created_at DESC")
 		@comments = Comment.all
 		@comment = Comment.where(post_id: @post)
+		# se quiser selecionar somente post do usuario
+			# @posts = Post.where(user_id: current_user)
 	end
 
 

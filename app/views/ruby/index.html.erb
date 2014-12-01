@@ -11,5 +11,22 @@
 
 	<%= link_to 'Voltar', home_index_path, class: "btn btn-default" %>
 
-
 </div>
+
+	<hr>
+	<h1><%= link_to 'Gems', ruby_gems_path , class: "btn btn-primary" %></h1>
+
+
+
+<h3>Dica: rails g simple_form:install --bootstrap</h3>
+<h3>Dica: quando foto incluir no cabecalho multipart = true</h3>
+<p> < % = simple_form_for @posts, <code>html: { multipart: true } do |f| % ></code></p>
+
+
+
+<h3>Dica: Pluralize</h3>
+<p>< % = pluralize(@posts.errors.count, "error") %></p>
+
+<p>Dica: post.created_at.strftime("%B, %d, %Y)  %></p>
+
+<p>Dica: LOGOTIPO < %= link_to image_tag('logo.svg'), root_path, id: "logo" %></p>

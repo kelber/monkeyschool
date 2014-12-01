@@ -23,6 +23,7 @@ gem 'bootstrap-sass', '~> 3.3.1.0'
 gem 'simple_form', '~> 3.0.2'
 gem 'devise'
 gem 'font-awesome-sass'
+gem 'masonry-rails'
 
 
 gem 'acts_as_votable', '~> 0.10.0'

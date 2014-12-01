@@ -5,7 +5,8 @@ class RubyController < ApplicationController
 	def aplicacoes
 	end
 
-	
+	def gems
+	end	
 
 	
 end

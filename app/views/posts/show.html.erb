@@ -58,7 +58,7 @@
 
 
 <% @comments.each do |comment| %>
-	<p> <%= simple_format(comment.body) %></p>
+	<p> <%= comment.body %></p>
 
 	<% if current_user == comment.user %>
 	<p><%= comment.user.name %> </p>

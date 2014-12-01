@@ -17,12 +17,53 @@
 		</p>
 
 
-	<h3>Haml</h3>
+	<h1>Haml</h1>
 	<div class="well">
 			<p>Delay nao é problema do haml<br>
 			remover as linhas 2 escrito turbolinks do cabecalho turbolinks = true</p>
 			<p>Remover tambem do JS e gems</p>
+
+			<p>no application(header)</p>
+			<p>%link { rel: 'stylesheet', :href => 'http://googlefonts', type: 'text/css' }</p>
 	</div>
+
+	<h1>Estilos CSS</h1>
+	<div class="well">
+	<p>
+		.post { bakcground: white; <Br>
+				.title {<br>
+					padding: 2em 5%;<br>
+					margin: 0;<br>
+					a { <br>
+					border-bottom: 1px solid #D1d1d1;<Br>
+					}<Br>
+				}}<br>
+	</p>
+
+	<p>Outras cores: #EDEFF0;<BR>
+	#397CAC;<BR>
+	#B2BAC2;<BR>
+
+	<p>DICAS:<bR>
+	http://html-ipsum.com/</p>
+	</div>
+
+		<h1>Ex. aplicacao NoteNote</h1>
+		<p>onde para entrar o usuario deve estar authenticado</p>
+
+		<div class="well">
+		<p><kbd>Routes - Usando dois roots</kbd></p>
+		<p>
+			root 'welcome#index'<br>
+			
+			authenticated :user do<br>
+				root 'notes#index', as: 'authenticated_root'<br>
+				end<br>
+				// se usuario estiver authenticado o root será o notes#index
+			</p>
+		</div>
+
+	<hr>
 
 
 <h1>Criando aplicação Xinga Ai  <%= link_to 'XingaAi', posts_path , class: "btn btn-primary" %></h1>
@@ -209,9 +250,9 @@ def new<Br>
 
 			<hr>
 			<p>def create<br>
-				@post = Post.find(params[:post_id])<br>
-				@comment = @post.comments.new(strong params)<br>
-				@comment.user_id = current_user.id<br>
+				<strong>@post</strong> = Post.find(params[:post_id])<br>
+				@comment = <strong>@post</strong>.comments.new(strong params)<br>
+				@comment.user_id = current_user.id  <code>obs: (opcional) if current_user</code><br>
 				@comment.post_id = @post.id<br>
 
 				if @comment.save<Br>
@@ -274,10 +315,20 @@ def new<Br>
 			end</p>
 
 
-			<h4>Dica: Para mostrar no index total de comentarios por post</h4>
+			<p><kbd>Dicas: para View</kbd></p>
 			<p>< %= post.comments.count %></p>
 				<h4>Dica: Simple_format divide em blocos o texto para melhor visualizacao</h4>
 				<p><strong> < %= simple_format(comment.body) % ></strong></p>
+
+				<h4>Dica: Truncate limitando quantidade mostrada</h4>
+				<p><strong>< %= truncate(comment.body, length: 100) % ></strong></p>
+
+
+				<h4>Dica: Visualizando somente Post do Usuario</h4>
+				<p> def index<Br>
+					@posts = Post.where(user_id: current_user)<br>
+					end<Br>
+				</p>
 
 		</div>
 
@@ -337,17 +388,32 @@ def new<Br>
 				< % = link_to (image_tag @random_post.image.url(: small)), post_path(@random_post) %><br>
 				ps: no paperclip gem
 			</p>
-
-
-
 			</div>
 
 
+			<h1>Criando Categorias</h1>
+			<div class="well">
+			<p>rails g migration add_category_id_to_post  category_id:integer</p>
+			<p>Ajustar no associations model</p>
+			<p><kbd>View:</kbd></p>
+			<p> < %= f.collection_select :category_id, Category.all, :id, :name, { prompt: "Escolha a Categoria" } % ></p>
 
-
-
-
-
-
-
+			<p><kbd>Strong Params</kbd>
+			<p>:category_id  no Strong Params</p>
+			</div>
 </div>
+
+			<h1>Selecionando Categoria na pagina Index</h1>
+			<p>Ex. art, music, business no header ou aqui na lateral nos icones</p>
+			<p>Outro ex. é carro se nao tiver faixa preço x mostre tudo ou só o que tiver</p>
+
+			<div class="well">
+			<p>def index<br>
+					if params[:category].blank?<br>
+					@posts = Post.all<br>
+				  else<br>
+				  @category_id = Category.find_by(name: params[:category]).id<BR>
+				  @articles = Article.where(category_id: @category_id).order("created_at DESC")<BR>
+				  end<br>
+			</p>
+			</div>
