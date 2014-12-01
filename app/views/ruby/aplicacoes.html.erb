@@ -166,6 +166,8 @@ def new<Br>
 		<div class="well">
 		<p><kbd>Adicionando Comments</kbd><br>
 		<code>rails g model comment  body:text  post:references user:references</code>
+
+		<p>rails g controller <code>Comments *</code> no plural</p>
 		<p>rake db:migrate</p>
 
 		<h4><strong>Associations:</strong></h4>
@@ -180,10 +182,11 @@ def new<Br>
 			</p>
 
 
-			<p>rails g controller <code>Comments *</code> no plural</p>
+			
 
 			<p><kbd>CommentsController</kbd>
 			<p>before_action :authenticate_user!</p>
+			<p><strong>Caso nao faca irá dar erro na linha @comment.user.id por NAO ter o id</strong></p>
 
 			<hr>
 			<p>def create<br>
@@ -211,22 +214,54 @@ def new<Br>
 			<p>private<br>
 			
 				def comment_params <Br>
-					params.require(:comment).permit(:content)<br>
+					params.require(:comment).permit(:body)<br>
 				end<br>
 			</p>
+		</div>
 
+		<h3>Adicionando campos ao Form do Comment</h3>
+			<p>O Nested tem que ser adicionado ao _form.html.erb do comment </p>
+		<div class="well">
+		<p>< % = simple_form_for([@post , @post.comments.new]) do |f| % ><br>
+			 < % =f.input :body , label: "Escreva aqui" % ><br>
+			 < % =f.button :submit % >
+		</p>
+		<p><code>Atenção sem espaco _form_for([ conteudo aqui - atencao ])</code></p>
 
-
-
-
-
-
-
-
-
+		<p>Aparecendo formulario no show</p>
+		<p> < %= render 'comments/form' %></p>
 
 		</div>
 
+
+		<h3>Mostrando comentarios no Show</h3>
+			<p>Pluralize funciona semelhante ao blank_slate</p>
+		<div class="well">
+		<p><code>< %= pluralize(@post.comments.count, "Comentários") % ></code></p>
+		<p>< % = @comments.each do |comment| % ><br>
+			 < % = comment.body % ><br>
+			 < % = comment.user.name % ><br>
+			 < %= link_to 'Delete Comment',[@post, comment], method: :delete, data: { confirm: "Are You Sure?" }, class: "btn btn-danger btn-sm" %>
+		</p>
+		<p><kbd>Apagar comment</kbd></p>
+		<p>No Route, colocar <code>, dependent: :destroy</code> para comentario nao ficar orfão</p>
+
+		<h3>Para funcionar tem que adicionarPost Controller</h3>
+		<p>def show<br>
+			 @comments = Comment.where(post_id: @post)<br>
+			end</p>
+
+
+			<h4>Dica: Para mostrar no index total de comentarios por post</h4>
+			<p>< %= post.comments.count %></p>
+		</div>
+
+
+		<h3>Gem:  acts_as_votable </h3>
+			<div class="well">
+			<p>rails g acts_as_votable:migration</p>
+
+			</div>
 
 
 

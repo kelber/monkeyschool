@@ -20,7 +20,9 @@ Rails.application.routes.draw do
 ##############################################################
 # Aplicacao xingaAi
 #
-  resources :posts
+  resources :posts do
+  	resources :comments , dependent: :destroy
+  end
 
 
 

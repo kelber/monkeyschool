@@ -10,4 +10,27 @@
 
 <%= link_to 'Back', posts_path , class: "btn btn-default" %>
 
+	<hr>
+	<h3>Adicionar Comentarios</h3>
+	<%= render 'comments/form' %>
+	<hr>
+
+<hr>
+<h3>Veja Comentarios</h3>
+<h3><%= pluralize(@post.comments.count, "Comment") %></h3>
+
+
+<% @comments.each do |comment| %>
+	<h3> <%= comment.body %></h3>
+	<p><%= comment.user.name %> </p>
+	<%= link_to 'Delete Comment',[ @post, comment], method: :delete, data: { confirm: "Are You Sure?" }, class: "btn btn-danger btn-sm" %>
+	<hr>
+<% end %>
+
+
+
+
+
+
+
 </div>

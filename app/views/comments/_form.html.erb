@@ -1,0 +1,7 @@
+<%= simple_form_for([@post, @post.comments.new]) do |f| %>
+	<%= f.input :body, input_html: { class: "form-control", rows: "5", placeholder: "Adicione seu comentario"} %>
+	<%= f.button :submit, class: "btn btn-primary" %>
+
+
+
+<% end %>
