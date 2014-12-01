@@ -254,12 +254,49 @@ def new<Br>
 
 			<h4>Dica: Para mostrar no index total de comentarios por post</h4>
 			<p>< %= post.comments.count %></p>
+				<h4>Dica: Simple_format divide em blocos o texto para melhor visualizacao</h4>
+				<p> < %= simple_format(comment.body) % ></p>
+
 		</div>
 
 
 		<h3>Gem:  acts_as_votable </h3>
 			<div class="well">
 			<p>rails g acts_as_votable:migration</p>
+			<p>rake db:migrate</p>
+
+			<p><kbd>Model</kbd></p>
+				<p>Adicionar no Inicio de tudo</p>
+				<p>acts_as_votable - no Model post.rb</p>
+
+			<p><kbd>Root</kbd></p>
+			<p>resources :posts do<br>
+				member do<br>
+				get "like", to: "posts#upvote"<br>
+				get "dislike", to: "posts#downvote"<br>
+					resources :comments<br>
+					end<br>
+				end
+				</p>
+
+				<p><kbd>Controller</kbd></p>
+					<p>def upvote<br>
+					@post.upvote_by current_user<br>
+					redirect_to :back<br>
+					end
+					</p>
+					<hr>
+					<p>def downvote<br>
+					@post.downvote_by current_user<br>
+					redirect_to :back<br>
+					end
+					</p>
+
+					<p><code>Ajustar before_action add:  [:upvote, :downvote]</code>
+
+
+
+
 
 			</div>
 

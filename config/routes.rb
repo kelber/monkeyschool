@@ -21,6 +21,10 @@ Rails.application.routes.draw do
 # Aplicacao xingaAi
 #
   resources :posts do
+    member do
+    get "like", to: "posts#upvote"
+    get "dislike", to: "posts#downvote"
+    end
   	resources :comments , dependent: :destroy
   end
 

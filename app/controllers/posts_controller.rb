@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 
-	before_action :find_post, only: [:show, :edit, :update, :destroy]
+	before_action :find_post, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
 	before_action :authenticate_user!, except: [:index,:show]
 
 
@@ -8,16 +8,14 @@ class PostsController < ApplicationController
 		@posts = Post.all.order("created_at DESC")
 		@comments = Comment.all
 		# @comment = Comment.where(post_id: @post)
-
 	end
+
 	def show
 		@comments = Comment.where(post_id: @post).order("created_at DESC")
-
 	end
 
 	def new
 		@post = current_user.posts.new
-
 	end
 
 	def create
@@ -44,6 +42,18 @@ class PostsController < ApplicationController
 		@post.destroy
 		redirect_to posts_path, notice: "Deleted"
 	end
+
+
+	def upvote
+		@post.upvote_by current_user
+		redirect_to :back
+	end
+	
+	def downvote
+		@post.downvote_by current_user
+		redirect_to :back
+	end
+					
 
 	private
 

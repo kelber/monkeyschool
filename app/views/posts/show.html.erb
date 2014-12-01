@@ -1,4 +1,7 @@
 <div class="container">
+
+
+
 <h1><%= @post.title %></h1>
 <h3><%= @post.description %></h3>
 <h3><%= @post.user.email %></h3>
@@ -6,9 +9,31 @@
 <%= link_to 'Delete', post_path(@post), method: :delete, data: { confirm: "Are You Sure?" }, class: "btn btn-danger" %>
 <%= link_to 'Edit', edit_post_path(@post), class: "btn btn-default" %>
 
-
-
 <%= link_to 'Back', posts_path , class: "btn btn-default" %>
+
+
+	<h3>Opiniao Like/Dislike</h3>
+	<div class="btn group">
+			
+			<%= link_to like_post_path(@post), method: :get, class: "btn btn-default" do %>
+			<span class="fa fa-thumbs-o-up"> Like</span>
+			<%= @post.get_upvotes.size %>
+			<% end %>
+
+			<%= link_to dislike_post_path(@post), method: :get, class: "btn btn-default" do %>
+			<span class="fa fa-thumbs-o-down"> DisLike</span>
+			<%= @post.get_downvotes.size %>
+			<% end %>
+	</div>
+
+ 	
+
+
+
+
+	
+
+
 
 	<hr>
 	<h3>Adicionar Comentarios</h3>
@@ -21,7 +46,8 @@
 
 
 <% @comments.each do |comment| %>
-	<h3> <%= comment.body %></h3>
+	<p> <%= simple_format(comment.body) %></p>
+
 	<p><%= comment.user.name %> </p>
 	<%= link_to 'Delete Comment',[ @post, comment], method: :delete, data: { confirm: "Are You Sure?" }, class: "btn btn-danger btn-sm" %>
 	<hr>
