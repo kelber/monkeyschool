@@ -1,0 +1,13 @@
+<div class="container">
+<h1><%= @post.title %></h1>
+<h3><%= @post.description %></h3>
+<h3><%= @post.user.email %></h3>
+
+<%= link_to 'Delete', post_path(@post), method: :delete, data: { confirm: "Are You Sure?" }, class: "btn btn-danger" %>
+<%= link_to 'Edit', edit_post_path(@post), class: "btn btn-default" %>
+
+
+
+<%= link_to 'Back', posts_path , class: "btn btn-default" %>
+
+</div>

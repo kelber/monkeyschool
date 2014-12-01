@@ -1,0 +1,18 @@
+<div class="container">
+
+<h1>Index Post</h1>
+
+<%= link_to 'New Post', new_post_path, class: "btn btn-primary" %>
+
+<hr>
+
+<% @posts.each do |post| %>
+	<%= link_to post.title , post %>
+	<%= time_ago_in_words(post.created_at) %><BR>
+
+
+<% end %>
+
+
+
+</div>

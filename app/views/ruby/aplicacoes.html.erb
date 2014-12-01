@@ -1,3 +1,5 @@
+<div class="container">
+
 <%= render partial: 'layouts/navbar' %>
 
 <div class="well">
@@ -6,7 +8,10 @@
 	<%= link_to 'Voltar', home_index_path, class: "btn btn-default" %>
 <hr>
 
-	<h1>Criando aplicação Xinga Ai</h1>
+	<h1>Criando aplicação Xinga Ai  <%= link_to 'XingaAi', posts_path , class: "btn btn-primary" %></h1>
+
+<br>
+
 
 	<h4><kbd>Preparando a aplicacao no Prompt</kbd></h4>
 	
@@ -15,6 +20,7 @@
 		<p>rails g model Post title:string  description:text</p>
 		<p>rails g controller Posts </p>
 		<p>rake db:migrate</p>
+		<p><code>Veja que o model é singular e controller no Plural</code></p>
 </div>
 <p>1 - rails new nomedoaplicativo -> para criar a aplicacao deve-se chamar desta maneira</p>
 	<p>2 - rails g model -> O Model é responsavel pelo banco de dados( nao somente isto ), mas pense assim. ele deve ser seguido do nome do que se quer criar no caso um post(igual ao twitter) seguido dos campos que serão criados no banco de dados. no caso title:string  é o titulo (string) é a representacao de letras e numero caracteres.  description:text é a descricao:formato texto
@@ -25,11 +31,210 @@
 
 
 <div class="well">
-<h4><kbd>Routes</kbd></h4>
-	<p>root 'posts#index'<br>
-			resources :posts do <Br>
-				resources :comments<Br>
-			end
-	</p>
+<h4><kbd>Controller com Posts</kbd></h4>
+	<p>class PostsController < ApplicationController<Br>
+
+	before_action :find_post, only: [:show, :edit, :update, :destroy]<Br>
+
+	def index<Br>
+		@posts = Post.all.order("created_at DESC")<Br>
+	end<Br>
+	def show<Br>
+	end<Br>
+	def new<Br>
+		@post = Post.new<Br>
+	end<Br>
+	def create<Br>
+		@post = Post.new(post_params)<Br>
+		if @post.save<Br>
+			redirect_to @post, notice: "Created Successfully"<Br>
+		else<Br>
+			render 'new'<Br>
+		end<Br>
+	end<Br>
+	def edit<Br>
+	end<Br>
+
+	def update<Br>
+		if @post.update(post_params)<Br>
+			redirect_to @post, notice: "Updated Successfully"<Br>
+		else<Br>
+			render 'edit'<Br>
+		end<Br>
+	end<Br>
+
+	def destroy<Br>
+		@post.destroy<Br>
+		redirect_to posts_path, notice: "Deleted"<Br>
+	end<Br>
+
+	private<Br>
+
+	def find_post<Br>
+		@post = Post.find(params[:id])<Br>
+	end<Br>
+
+	def post_params<Br>
+		params.require(:post).permit(:title, :description)<Br>
+	end<Br>
+end
+</p>
 </div>
 
+<p>Fazer todos os procedimentos necessarios para views e etc.....</p>
+
+<h3>Agora Vamos para gem Devise</h3>
+
+<div class="well">
+<p><kbd>Seguir a gem --> obs para Strong params Sanitizer</kbd></p>
+<p>rails g devise:install</p>
+<p>rails generate devise User</p>
+<p>config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }</p>
+<p> Alerts</p>
+<p>rails g devise:views</p>
+
+<code>Agora adicionar user_id no post relacionamento</code>
+<p>rails g migration add_user_id_to_<code>post</code>  user_id:integer</p>
+<p>Obs: post(sing) seguir Model</p>
+</div>
+
+<h3>Fazer associations: has_many x belongs_to</h3>
+<p>Atencao com plural 's'</p>
+
+<div class="well">
+<h3>Ajustando controller</h3>
+
+<p><code>before_action :authenticate_user!, except: [:index,:show]</code></p>
+
+def new<Br>
+		<del>@post = Post.new</del><Br>
+		<code>@post = current_user.posts.new</code><br>
+	end<Br>
+	def create<Br>
+		<del>@post = Post.new(post_params)</del><Br>
+		<code>@post = current_user.posts.new(post_params)</code><br>
+		if @post.save<Br>
+			redirect_to @post, notice: "Created Successfully"<Br>
+		else<Br>
+			render 'new'<Br>
+		end<Br>
+	end<Br>
+
+	<code>Atencao: Post.new virou posts.new (plural)</code><br>
+	<p>Apagar registros anteriores para funcionar... </p>
+	<p>Lembre-se p = Post.all</p>
+	<p>p.delete_all --> para apagar no console</p>
+
+</div>
+
+<h3>Criando campo name para Devise</h3>
+
+
+<div class="well">
+<p>rails g migration add_name_to_user  name:string</p>
+<p>rake db:migrate</p>
+
+<p><kbd>Strong Params</kbd></p>
+<p>No Rails4 temos que adicionar strong params no application Controller</p>
+
+<p>Copiar e colar do github</p>
+<p>class ApplicationController < ActionController::Base<br>
+  before_action :configure_permitted_parameters, if: :devise_controller?<br>
+
+  protected<br>
+
+  def configure_permitted_parameters<br>
+    devise_parameter_sanitizer.for(:sign_up) << :name<br>
+  <code>devise_parameter_sanitizer.for(:account_update) << :name</code></p><br>
+  end<br>
+</p>
+
+<p><strong>Agora tem que ajustar as views </strong></p>
+<p>@post.user.email ou @post.user.name </p>
+
+<h4>Dica: Listar index só o post de cada usuario</h4>
+<p> @post = current_user.posts.all.order("created_at DESC")</p>
+
+
+</div>
+
+	<h1>Nested</h1>
+	<h3>Post c/ comments  c/ user</h3>
+	<h3>Adicionando Comments ao Post com 2 Referencias</h3>
+	<p>post:references  e  user:references</p>
+
+		<div class="well">
+		<p><kbd>Adicionando Comments</kbd><br>
+		<code>rails g model comment  body:text  post:references user:references</code>
+		<p>rake db:migrate</p>
+
+		<h4><strong>Associations:</strong></h4>
+		<p>Comment.rb -> belongs_to :post, belongs_to :user</p>
+		<p>Post.rb -> has_many :comments </p>
+		<p>User.rb -> has_many :posts , has_many:comments </p>
+
+		<h4><strong>Root</strong></h4>
+			<p>resources :posts do <br>
+						resources :comments<br>
+					end<br>
+			</p>
+
+
+			<p>rails g controller <code>Comments *</code> no plural</p>
+
+			<p><kbd>CommentsController</kbd>
+			<p>before_action :authenticate_user!</p>
+
+			<hr>
+			<p>def create<br>
+				@post = Post.find(params[:post_id])<br>
+				@comment = @post.comments.new(strong params)<br>
+				@comment.user_id = current_user.id<br>
+				@comment.post_id = @post.id<br>
+
+				if @comment.save<Br>
+				 redirect_to post_path(@post)<br>
+				else<br>
+					render 'new'<br>
+				end<br>
+				</p>
+
+			<hr>
+			<p>def destroy</br>
+				@post = Igual <br>
+				@comment = @post.comments.find(params[:id])<br>
+				@comment.destroy<br>
+					redirect_to post_path(@post)<br>
+				end<br>
+			</p>
+
+			<p>private<br>
+			
+				def comment_params <Br>
+					params.require(:comment).permit(:content)<br>
+				end<br>
+			</p>
+
+
+
+
+
+
+
+
+
+
+
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+</div>

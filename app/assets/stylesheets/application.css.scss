@@ -21,8 +21,15 @@
 
 @import 'partials/welcome';
 @import 'partials/home';
+@import 'partials/posts';
 
 
+
+
+
+/* *********************************************************************
+*  Fonts & Sizes  
+************************************************************************/
 
 
 /*@import url(http://fonts.googleapis.com/css?family=Nunito:400,700);*/
@@ -35,19 +42,24 @@
 /*@import url(http://fonts.googleapis.com/css?family=Indie+Flower);
 */
 
-
-
 h1 {
 font-family: 'Poiret One', cursive;
 font-weight: bold;
 }
 
+h3 {
+font-family: 'Poiret One', cursive;
+font-weight: bold;
+}
 
 h4 {
   font-family: 'Ubuntu Mono', cursive;
-
 }
 
+p {
+  font-family: 'Ubuntu Mono', cursive;
+  font-size: 1.2em;
+}
 
 
 

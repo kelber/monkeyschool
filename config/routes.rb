@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
 	# ATENCAO SE COLOCAR resources ele SÓ FUNCIONA ROTAS RESTful 
   
   root 'welcome#index'
@@ -14,4 +15,17 @@ Rails.application.routes.draw do
 
   get 'ruby/index'
   get 'ruby/aplicacoes'
+
+ 
+##############################################################
+# Aplicacao xingaAi
+#
+  resources :posts
+
+
+
+
+
+
+
 end

@@ -12,7 +12,18 @@
 
 
 
+<% flash.each do |name,msg| %>
+  <%= content_tag(:div, msg, class: "alert alert-#{name}") %>
+ 
+<% end %>
+
+
+
+
 <%= yield %>
+
+
+
 
 
 <script type="text/javascript">
@@ -20,6 +31,10 @@ $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("active");
 });
+
+
+
+
 
 </script>
 
