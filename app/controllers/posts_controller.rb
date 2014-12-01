@@ -7,11 +7,15 @@ class PostsController < ApplicationController
 	def index
 		@posts = Post.all.order("created_at DESC")
 		@comments = Comment.all
-		# @comment = Comment.where(post_id: @post)
+		@comment = Comment.where(post_id: @post)
 	end
+
+
 
 	def show
 		@comments = Comment.where(post_id: @post).order("created_at DESC")
+		@random_post = Post.where.not(id: @post).order("RANDOM()").first
+	
 	end
 
 	def new
@@ -54,6 +58,10 @@ class PostsController < ApplicationController
 		redirect_to :back
 	end
 					
+
+
+
+
 
 	private
 

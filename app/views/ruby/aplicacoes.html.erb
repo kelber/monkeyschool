@@ -8,7 +8,24 @@
 	<%= link_to 'Voltar', home_index_path, class: "btn btn-default" %>
 <hr>
 
-	<h1>Criando aplicação Xinga Ai  <%= link_to 'XingaAi', posts_path , class: "btn btn-primary" %></h1>
+	
+
+<h1><code>Verificar</code> Flash.each para alerts</H1>
+		<p> < % flash.each do |name,msg| %><br>
+		< %= content_tag(:div, msg, class: "alert alert-#{name}") % ><br>
+		< % end % >
+		</p>
+
+
+	<h3>Haml</h3>
+	<div class="well">
+			<p>Delay nao é problema do haml<br>
+			remover as linhas 2 escrito turbolinks do cabecalho turbolinks = true</p>
+			<p>Remover tambem do JS e gems</p>
+	</div>
+
+
+<h1>Criando aplicação Xinga Ai  <%= link_to 'XingaAi', posts_path , class: "btn btn-primary" %></h1>
 
 <br>
 
@@ -26,7 +43,9 @@
 	<p>2 - rails g model -> O Model é responsavel pelo banco de dados( nao somente isto ), mas pense assim. ele deve ser seguido do nome do que se quer criar no caso um post(igual ao twitter) seguido dos campos que serão criados no banco de dados. no caso title:string  é o titulo (string) é a representacao de letras e numero caracteres.  description:text é a descricao:formato texto
 	o </p>
 	<p>rails g controller:  </p>
-	<H3>Termino aqui. agora vou fazer somente codigos</H3>
+	
+
+
 	<hr>
 
 
@@ -241,10 +260,13 @@ def new<Br>
 		<p>< % = @comments.each do |comment| % ><br>
 			 < % = comment.body % ><br>
 			 < % = comment.user.name % ><br>
-			 < %= link_to 'Delete Comment',[@post, comment], method: :delete, data: { confirm: "Are You Sure?" }, class: "btn btn-danger btn-sm" %>
+
+			<strong> < %= if comment.user == current_user %></strong><br>
+			 < %= link_to 'Delete Comment',[@post, comment], method: :delete, data: { confirm: "Are You Sure?" }, class: "btn btn-danger btn-sm" %><br>
+			 < % end %>
 		</p>
 		<p><kbd>Apagar comment</kbd></p>
-		<p>No Route, colocar <code>, dependent: :destroy</code> para comentario nao ficar orfão</p>
+		<p>No Route, colocar <code>,dependent: :destroy</code> para comentario nao ficar orfão</p>
 
 		<h3>Para funcionar tem que adicionarPost Controller</h3>
 		<p>def show<br>
@@ -255,7 +277,7 @@ def new<Br>
 			<h4>Dica: Para mostrar no index total de comentarios por post</h4>
 			<p>< %= post.comments.count %></p>
 				<h4>Dica: Simple_format divide em blocos o texto para melhor visualizacao</h4>
-				<p> < %= simple_format(comment.body) % ></p>
+				<p><strong> < %= simple_format(comment.body) % ></strong></p>
 
 		</div>
 
@@ -294,12 +316,31 @@ def new<Br>
 
 					<p><code>Ajustar before_action add:  [:upvote, :downvote]</code>
 
+			</div>
 
+			<h1>Random</h1>
+			<p>Fazendo um random no pagina show</p>
+			<p>Interessante para sugerir outros links</p>
+
+			<div class="well">
+			<p><kbd>Controller - show</kbd></p>
+			<p>def show<br>
+				<code>@random_post = Post.where.not(id: @post).order("RANDOM()").first</code><br>
+				end
+			</p>
+
+			<p><kbd>View - show</kbd></p>
+			<p>< %= link_to @random_post.title, post_path(@random_post) %></p>
+			<p>outros campos:</p>
+			<p>Ex. Like -> @random_post.get_likes.size </p>
+			<p>Ex. Imagem ->  <br>
+				< % = link_to (image_tag @random_post.image.url(: small)), post_path(@random_post) %><br>
+				ps: no paperclip gem
+			</p>
 
 
 
 			</div>
-
 
 
 
