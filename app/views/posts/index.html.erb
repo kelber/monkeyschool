@@ -9,7 +9,7 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-		<a class="navbar-brand" href="#">POST'S</a>
+		<a class="navbar-brand" href="/posts">POST'S</a>
 	</div>
 
 	<!-- Collect the nav links, forms, and other content for toggling -->
@@ -39,8 +39,10 @@
 	</div><!-- /.navbar-collapse -->
 </nav>
 
-
+<%= link_to 'Voltar Monkey', home_index_path, class: "btn btn-primary" %>
 <h1>Index Post</h1>
+
+
 
 <%= link_to 'New Post', new_post_path, class: "btn btn-primary" %>
 
@@ -53,12 +55,25 @@
 <h3>Total de Posts | <%= @posts.count %></h3>
 <h3>Total de Comentarios | <%= @comments.count %></h3>
 <hr>
-<% @posts.each do |post| %>
-	<h3><%= link_to post.title , post %></h3>
-	<p><%= time_ago_in_words(post.created_at) %></p>
-	<p><%= post.user.name %></p>
-	<p><%= post.comments.count %> comentarios</p>
-<hr>
+
+
+<div id="posts" class="transitions-enabled infinite-scroll clearfix">
+	<% @posts.each do |post| %>
+		<div class="col-xs-8  col-sm-4 col-md-8">
+		<div class="box panel panel-default">
+		<div al>
+		<div id="head">
+				<h3 align="center"><%= link_to post.title , post %></h3>
+		</div>
+			<p class="text-center"><%= time_ago_in_words(post.created_at) %></p>
+			<p class="text-center"><%= post.user.name %></p>
+			<p class="text-center"><%= post.comments.count %> comentarios</p>
+	  
+	  </div>
+   </div>
+</div>
+
+
 
 
 

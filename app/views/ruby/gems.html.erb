@@ -56,15 +56,31 @@
 
 	<h3>Masonry-Rails</h3>
 	<div class="well">
-	<p>colar no aplication.js embaixo jquery <pre>//= require masonry/jquery.masonry</pre> </p>
+	<p>colar no aplication.js embaixo jquery //= require masonry/jquery.masonry </p>
 	<p>No arquivo q for usar. post.js.coffee</p>
 	<p>$ -> <br>
-			$('#posts').imageLoaded ->  <br>
+			$('#posts').imagesLoaded ->  <br>
 				$('#posts').masonry   <Br>
 				itemSelector: '.box'   <br>
 				isFitWidth: true  </p>
 
+				<hr>
+				<h3>Arrumar Css estilizacao <code>Correta</code></h3>
+				<p>Adicionar ao application.css.scss</p>
+				<p>*= require 'masonry/transitions'</p>
+				<hr>
 
 
-
+				<h3>No Index</h3>
+				<p>< div id="posts" class="transitions-enabled infinite-scroll clearfix"></p>
+				<p>< % @posts.each do |post| % ></p>
+				<p>< div class="box panel panel-default"></p>
+				<p>	< h3>< %= link_to post.title , post % >< /h3></p>
+				<p>< div class="box panel panel-body" ></p>
+				<p>< %= time_ago_in_words(post.created_at) % ></p>
+				<p>< %= post.user.name % ></p>
+				<p>< %= post.comments.count %> comentarios</p>
+				<p>< /div></p>
+				<p>< /div></p>
+				
 	</div>

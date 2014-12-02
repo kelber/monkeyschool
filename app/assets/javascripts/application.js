@@ -17,6 +17,20 @@
 //= require turbolinks
 //= require_tree .
 
+//= require masonry/jquery.event-drag
+//= require masonry/jquery.imagesloaded.min
+//= require masonry/jquery.infinitescroll.min
+//= require masonry/modernizr-transitions
+
+
+
+
+$ -> 
+  $('#posts').imagesLoaded -> 
+    $('#posts').masonry 
+      itemSelector: '.box' 
+      isFitWidth: true
+
 
 
 	/*Menu-toggle*/
