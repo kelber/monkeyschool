@@ -3,67 +3,10 @@
 <%= render partial: 'layouts/navbar' %>
 
 <div class="well">
-	<h1>Passo a Passo para criação de uma aplicação</h1>
+	<h1>Aplicativo Xinga Ai</h1>
 </div>
 	<%= link_to 'Voltar', home_index_path, class: "btn btn-default" %>
 <hr>
-
-	
-
-<h1><code>Verificar</code> Flash.each para alerts</H1>
-		<p> < % flash.each do |name,msg| %><br>
-		< %= content_tag(:div, msg, class: "alert alert-#{name}") % ><br>
-		< % end % >
-		</p>
-
-
-	<h1>Haml</h1>
-	<div class="well">
-			<p>Delay nao é problema do haml<br>
-			remover as linhas 2 escrito turbolinks do cabecalho turbolinks = true</p>
-			<p>Remover tambem do JS e gems</p>
-
-			<p>no application(header)</p>
-			<p>%link { rel: 'stylesheet', :href => 'http://googlefonts', type: 'text/css' }</p>
-	</div>
-
-	<h1>Estilos CSS</h1>
-	<div class="well">
-	<p>
-		.post { bakcground: white; <Br>
-				.title {<br>
-					padding: 2em 5%;<br>
-					margin: 0;<br>
-					a { <br>
-					border-bottom: 1px solid #D1d1d1;<Br>
-					}<Br>
-				}}<br>
-	</p>
-
-	<p>Outras cores: #EDEFF0;<BR>
-	#397CAC;<BR>
-	#B2BAC2;<BR>
-
-	<p>DICAS:<bR>
-	http://html-ipsum.com/</p>
-	</div>
-
-		<h1>Ex. aplicacao NoteNote</h1>
-		<p>onde para entrar o usuario deve estar authenticado</p>
-
-		<div class="well">
-		<p><kbd>Routes - Usando dois roots</kbd></p>
-		<p>
-			root 'welcome#index'<br>
-			
-			authenticated :user do<br>
-				root 'notes#index', as: 'authenticated_root'<br>
-				end<br>
-				// se usuario estiver authenticado o root será o notes#index
-			</p>
-		</div>
-
-	<hr>
 
 
 <h1>Criando aplicação Xinga Ai  <%= link_to 'XingaAi', posts_path , class: "btn btn-primary" %></h1>

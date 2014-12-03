@@ -15,7 +15,8 @@
 
 	<hr>
 	<h1><%= link_to 'Gems', ruby_gems_path , class: "btn btn-primary" %></h1>
-
+	<h1><%= link_to 'Estilos Css & Scss', ruby_estilos_path , class: "btn btn-primary" %></h1>
+	<h1><%= link_to 'DragonFly Gem', ruby_dragonfly_path , class: "btn btn-danger" %></h1>
 
 
 <h3>Dica: rails g simple_form:install --bootstrap</h3>
@@ -30,3 +31,83 @@
 <p>Dica: post.created_at.strftime("%B, %d, %Y)  %></p>
 
 <p>Dica: LOGOTIPO < %= link_to image_tag('logo.svg'), root_path, id: "logo" %></p>
+
+
+<h3>Routes - Design Url's</h3>
+<div class="well">
+		<h3>Para Devise</h3>
+		<p>devise_scope :user do <Br>
+    get 'register', to: 'devise/registrations#new', as: :register <Br>
+    get 'login',    to: 'devise/sessions#new', as: :login<br>
+    get 'logout',   to: 'devise/sessions#destroy', as: :logout<br>
+  end	<br>
+  </p>
+  <h1>OBS: Acho que nao esta funcionando.</h1>
+
+
+  <h3>Rotas Normais</h3>
+  <p>Ex:  /feed   ---->  get 'feed', to: 'path#index', as: :feed</p>
+
+</div>
+
+
+	<h1>Atualizacao de Attributos = completed</h1>
+
+		<div class="well">
+
+
+		<p>1 - Adicionar o campo completed_at </p>
+		<p>rails g migration add_completed_at_post  completed_at:datetime</p>
+		<p>2 - Arrumar route</p>
+		<p>resources :posts do<br>
+				member do <br>
+				patch :complete    <Br>
+				end  <br>
+			end
+			</p>
+
+		</p>
+		<p>3 - Adicionar campo ao view obs:verificar se vai mais de um id</p>
+		<p>< %= link_to 'Mark Complete', complete_post_path(@post), method: :patch %></p>
+		</div>
+
+
+		<h1>Haml</h1>
+
+	<div class="well">
+			<p>Delay nao é problema do haml<br>
+			remover as linhas 2 escrito turbolinks do cabecalho turbolinks = true</p>
+			<p>Remover tambem do JS e gems</p>
+
+			<p>no application(header)</p>
+			<p>%link { rel: 'stylesheet', :href => 'http://googlefonts', type: 'text/css' }</p>
+	</div>
+
+
+
+
+
+<h1><code>Verificar</code> Flash.each para alerts</H1>
+		<p> < % flash.each do |name,msg| %><br>
+		< %= content_tag(:div, msg, class: "alert alert-#{name}") % ><br>
+		< % end % >
+		</p>
+
+
+	
+	
+		<h1>Ex. aplicacao NoteNote</h1>
+		<p>onde para entrar o usuario deve estar authenticado</p>
+
+		<div class="well">
+		<p><kbd>Routes - Usando dois roots</kbd></p>
+		<p>
+			root 'welcome#index'<br>
+			
+			authenticated :user do<br>
+				root 'notes#index', as: 'authenticated_root'<br>
+				end<br>
+				// se usuario estiver authenticado o root será o notes#index
+			</p>
+		</div>
+

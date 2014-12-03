@@ -8,5 +8,13 @@ class RubyController < ApplicationController
 	def gems
 	end	
 
+	def estilos
+	end
 	
+
+	def dragonfly
+
+	end
+
+
 end

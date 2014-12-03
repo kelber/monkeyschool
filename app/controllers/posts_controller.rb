@@ -20,6 +20,14 @@ class PostsController < ApplicationController
 	
 	end
 
+	def complete
+		@post = Post.find(params[:id])
+		@post.update_attribute(:completed_at , Time.now)
+		redirect_to @post, notice: "Completed"
+	end
+
+
+
 	def new
 		@post = current_user.posts.new
 	end

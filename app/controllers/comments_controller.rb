@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
 	# Normalmente teria index show edit mas aqui so havera create e destroy
 	before_action :authenticate_user!
 
+	
 
 	def create
 		@post = Post.find(params[:post_id])
