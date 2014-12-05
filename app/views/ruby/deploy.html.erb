@@ -1,0 +1,49 @@
+<div class="container">
+
+<%= render partial: 'layouts/navbar' %>
+<%= link_to 'Voltar', ruby_index_path, class: "btn btn-default" %>
+
+<h1>Deploy</h1>
+<hr>
+
+	<h3>Readme.md (markdown)</h3>
+		<div class="well">
+			<p>LEIAME<BR>
+			===========================================<br>
+			<strong>### Linha Bold</strong><br>
+			<strong>></strong> blockquote com barra lateral<br>
+			** palavra fica bold ** <br>
+			http://monkeyschool.heroku.com  <br>
+			* italico *  <br>
+			' puts "Hello World"  '
+		</div>
+
+
+		<h1>heroku</h1>
+
+		<h3>Pre Configuracao</h3>
+					<p>production.rb  --> config.assets.compile = true</p>
+					<p>Routes configuradas</p>
+					<p>group :production do <Br>
+							gem 'pg'<br>
+						end</br>
+
+						group :development do <br>
+							gem 'sqlite3'  <br>
+							end <br>
+					</p>
+
+
+			<div class="well">
+
+				<p>heroku login</p>
+				<p>heroku create <strong>nome_aplicacao</strong></p>
+
+				<p>git push heroku master  --> ver: git push -U master</p>
+				<p><i>heroku keys:add ~/.ssh/id_rsa.pub</i></p>
+
+				<h3>Atualizar</h3>
+				<p>git push heroku master</p>
+
+
+			</div>

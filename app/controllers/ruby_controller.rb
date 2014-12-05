@@ -5,16 +5,25 @@ class RubyController < ApplicationController
 	def aplicacoes
 	end
 
-	def gems
-	end	
+	def active_record
+	end
+	def deploy
+	end
+
+	def dragonfly
+	end
 
 	def estilos
 	end
+
+	def gems
+	end	
+
+	
 	
 
-	def dragonfly
+	
 
-	end
 
 
 end

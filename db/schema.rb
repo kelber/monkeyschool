@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141202113310) do
+ActiveRecord::Schema.define(version: 20141203105435) do
 
   create_table "comments", force: true do |t|
     t.text     "body"
@@ -30,6 +30,9 @@ ActiveRecord::Schema.define(version: 20141202113310) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.string   "image_uid"
+    t.string   "image_name"
+    t.boolean  "done"
   end
 
   create_table "users", force: true do |t|

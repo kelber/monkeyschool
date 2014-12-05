@@ -57,12 +57,14 @@
 <hr>
 
 
+
 <div id="posts" class="transitions-enabled infinite-scroll clearfix">
 	<% @posts.each do |post| %>
 		<div class="col-xs-8  col-sm-4 col-md-8">
 		<div class="box panel panel-default">
 		<div al>
 		<div id="head">
+			<%= image_tag post.image.thumb('400x200#').url , class: "thumbnail" if post.image_stored? %>
 				<h3 align="center"><%= link_to post.title , post %></h3>
 		</div>
 			<p class="text-center"><%= time_ago_in_words(post.created_at) %></p>
@@ -73,10 +75,4 @@
    </div>
 </div>
 
-
-
-
-
 <% end %>
-
-

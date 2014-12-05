@@ -1,0 +1,175 @@
+<div class="container">
+
+<%= render partial: 'layouts/navbar' %>
+<%= link_to 'Voltar', ruby_index_path, class: "btn btn-default" %>
+
+<h1>Active Record</h1>
+	<h3>Build and manage data</h3>
+	<h3>Store Data & Retrieve</h3>
+
+	<p>TED - Too early to Design -> Planejar Bem o que será feito com as informacoes - Reserve espaços para o futuro. Ex.Botão que ainda nao tem só futuro.</p>
+
+
+<hr>
+
+	<h1>Update Attributes:  eu nao gostei prefiro scope</h3>
+	<div class="well">
+		<p>def index <Br>
+			@todos = Todo.where(done:  false) <br>
+			@todone = Todo.where(done: true)</br>
+		</p>
+		<p> < %= link_to 'Mark as Done', todo_path(f), method: :put</p>
+
+		<h3>update_attributes</h3>
+		<p>Fazendo ex. modelo Todo</p>
+
+		<p>Adicionar completed_at:datetime para monitorar , não esquecer deve haver também um boolean</p>
+		<p>resources posts do<br>
+			<code>member do <br>
+				patch :complete</code><br>
+		end</p>
+
+		<p><kbd>controller:</kbd></p>
+		<p>def <code>complete</code> <br>
+			@posts = Post.find(params[:id]) <br>
+			@post.<code>update_attributes("completed_at , Time.now")</code><br>
+			redirect_to @posts_path, notice: "Post Completo"<Br>
+			end </p>
+
+			<p><kbd>view:</kbd></p>
+			<p>< % if post.<code>completed_at.blank?</code> %>  ---> obs: pode criar no model um methodo</p>
+			<p>< % if post.<code>realizado?</code></p> <br>
+			<p>< % link_to 'Mark as Complete', realizado_posts_path(post), <code>method: :patch</code></p>
+			<p>< % end %></p>
+
+
+			<p>Obs: no model def realizado? <br> !completed_at.blank? <br> end</p>
+
+
+	</div>
+
+	
+	<h1>Scope  --> Alvo</h1>
+	<h3>Ajuda a manter o Model limpo para o user interface</h3>
+
+	<div class="well">
+	<p><kbd>Model:</kbd></p>
+		<p>Exemplos:</p>
+		<p>scope :premier, -> { where("employee <= ?", 30) }</p>
+		<p>scope :newest,  -> { order("created_at DESC") }</p>
+		<p>scope :starts_with, ->(letter) { where("name LIKE ?", letter + "%") }</p>
+		<p>scope :nome, -> { where(first_name: "Hampton") }</p>
+
+		<p><kbd>View:</kbd></p>
+		<p>< %= @customers.<code>premier</code>.each do |c| %></p>
+		<p>< %= @customers.<code>premier.starts_with("Ham")</code>.first do |c| %></p>
+
+
+	</div>
+
+	<h1>Query Inteface</h1>
+		<div class="well">
+			<p> employee.find(20)</p>
+			<p>Ex. employee.<code>where</code>("name = ?", "Hampton")</p>
+			<p>outros SQLs</p>
+			<p>("name = ? OR age = ?", "Hampton", 30)</p>
+			<p>.order("id ASC").count ou .limit(1)   ou .limit(5).offset(5)</p>
+
+			<p>Avançados</p>
+				<p>customer.find_each { |x| nil }</p>
+
+			<H4>Eager - Loading -> nao executa toda a busca faz um PRE-load + rapido</H4>
+
+			<p>customer.each { |customer| puts customer.time_entries.<code>inspect</code> } </p>
+			
+			<h3>Atualizando campos no rails console</h3>
+			<p>Post.all.each { |f| f.update_attributes(state: "submitted") }</p>
+
+
+
+		</div>
+
+
+		<h1>FILTERS --> Selecionando por categoria</h1>
+			<h3>Exemplo JOB</h3>
+
+		<div class="well">
+		<H4>1 - Criar category </H4>
+			<p>rails g scaffold category  name:string</p>
+			<p>2 - add_category_id_to_jobs  category_id:integer</p>
+			<p>3- Criar associações Model</p>
+			<p>4- Strong Params - :category_id</p>
+
+		<p><kbd>_form</kbd></p>
+			<p><code>< % f.collection_select :category_id, Category.all, :id, :name, { include_blank: true  ou prompt: "Choose your category" }</code> %></p>
+
+			<p>No header ou layouts/application</p>
+			<p>< %= Category.all.each do |category| %></p>
+			<p>< %= link_to category.name, indexOuoutro_path(category: category.name)
+
+
+		<p>< %= @categories.each do |category| %></p>
+		<p>< %= link_to category.name , pagina_path(category:  category.name)</p>
+		<p>< % end %></p>
+
+		<p><kbd>Jobs controller</kbd></p>
+		<p>def index <br>
+			if params[:category].blank?  <br>
+					@jobs = Job.all   <br>
+			else  <br>
+					@category_id = Category<code>.find_by</code>(name: params[:category]).id  <br>
+					@jobs = Job.where(category_id: @category_id).order("created_at DESC") <br>
+				end <br>
+			end
+			</p>
+		</div>
+
+
+		<h1>Validates para User</h1>
+	<div class="well">
+			<p>presence :true</p>
+			<p>validates :username, length: { in: 3..15 }</p>
+			<p>validates :country, inclusion: ['us', 'ca', 'uk']</p>
+			<p>validates :name, exclusion: ['FDP']</p>
+			<p>validates :score, numericality:  true</p>
+			<p>validates :username, format: { with: /^[\w]$/} , message: "Username only letters and no ... space"</p>
+	</div>
+
+
+
+		<h1>CallBacks</h1>
+			<p>Constroi no Model um comportamento que será executado quando solicitado</p>
+			<p>Sempre que vc trigger --> create,update,edit,destroy</p>
+
+		<div class="well">
+			<p><code>before_</code>create</code></p>
+			<p><code>before_validation</code></p>
+			<p>after_validation</p>
+			<p>after_save</p>
+			<p>around_save --> antes e depois</p></Br>
+			<p>after_create</p>
+			<p>around_create</p>
+		
+
+			<h3>Exemplo com User</h3>
+				<p>validates :presence true, length: { in 4..100 } <br>
+					before_validation :ensure_exists  <Br>
+					before_validation :downcase_name <Br>
+				</p>
+				<p><strong>protected</strong></p>
+				<p>def ensure_exists <br>
+					 self.password ||= SecureRandom.urlsafe_base64  <Br>
+					 end
+				</p>
+				<p> def downcase_name <Br>
+				   self.name = self.name.downcase<Br>
+				  end
+				 </p>
+
+
+
+
+		</div>
+
+
+

@@ -27,8 +27,11 @@ Rails.application.routes.draw do
   get 'ruby/gems'
   get 'ruby/estilos'
   get 'ruby/dragonfly'
-
- 
+  get 'ruby/organograma'
+  get 'ruby/testes'
+  get 'ruby/active_record'
+  get 'ruby/email'
+  get 'ruby/deploy' 
 ##############################################################
 # Aplicacao xingaAi
 #
@@ -47,7 +50,6 @@ Rails.application.routes.draw do
     end
 
       end
-
 
 
 

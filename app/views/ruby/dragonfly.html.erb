@@ -11,7 +11,26 @@
 	<div class="well">
 			<p>gem 'dragonfly', '~> 1.0.7'</p>
 			<p>rails generate dragonfly</p>
-
+			<p>ps. Cria-se arquivo no config/initializers/dragonfly com configuracoes</p>
+			<hr>
+			<p>Vai migration que tiver ou crie uma e adiciona 2xcolunas</p>
+			<p>t.string :image_uid</p>
+			<p>t.string :image_name</p>
+			<hr>
+			<p>No Model adicionar no inicio</p>
+			<p>dragonfly_accessor <code>:image</code>ps: ou nome que se queira...</p>
+			<hr>
+			<p>No Form</p>
+			<p> ,:html => {:multipart => true} no cabecaolho do form</p>
+			<p>Colocar < % end %></p>
+			<p>< %= f.file_field :image %></p>
+			<hr>
+			<p>Strong Params</p>
+				<p>.permit(:image)</p>
+			<hr>
+			<p>Na Views:</p>
+			<p>No Show: -> < %= image_tag @post.image.url , class: "thumbnail" if @post.image_stored? %></p>
+			<p>No Index: -> recorte e cole - Tire o @ só isso </p>
 
 
 	</div>

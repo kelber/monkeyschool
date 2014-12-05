@@ -24,7 +24,7 @@ gem 'simple_form', '~> 3.0.2'
 gem 'devise'
 gem 'font-awesome-sass'
 gem 'masonry-rails'
-
+gem 'dragonfly', '~> 1.0.7'
 
 gem 'acts_as_votable', '~> 0.10.0'
 

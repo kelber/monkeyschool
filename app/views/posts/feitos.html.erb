@@ -1,0 +1,25 @@
+
+
+
+
+
+
+
+
+
+
+
+
+<h1>Listagem dos Feitos</h1>
+
+<div class="well">
+<% @posts.each do |post| %>
+		<div class="col-xs-8  col-sm-4 col-md-8">
+		<div class="box panel panel-default">
+		<div id="head">
+		<h3 align="center"><%= link_to post.title , post %></h3>
+		<p><%= link_to 'Mark as Done', post, method: :put %></p>
+
+ <% end %>
+
+</div>

@@ -18,12 +18,23 @@
 	<h1><%= link_to 'Estilos Css & Scss', ruby_estilos_path , class: "btn btn-primary" %></h1>
 	<h1><%= link_to 'DragonFly Gem', ruby_dragonfly_path , class: "btn btn-danger" %></h1>
 
+	<h3><%= link_to 'Organograma e Rotas RESTful', ruby_organograma_path %></h3>
+	<h3><%= link_to 'TESTES', ruby_testes_path %></h3>
+
+
+	<h3><%= link_to 'Email', ruby_email_path %></h3>
+	<h3><%= link_to 'Active Records', ruby_active_record_path %></h3>
+	<h3><%= link_to 'Deploy', ruby_deploy_path %></h3>
+
+
+<hr>
+
+
 
 <h3>Dica: rails g simple_form:install --bootstrap</h3>
-<h3>Dica: quando foto incluir no cabecalho multipart = true</h3>
-<p> < % = simple_form_for @posts, <code>html: { multipart: true } do |f| % ></code></p>
 
 
+<h3>@posts.each<code>_slice(3) ?? o que faz? </code></h3>
 
 <h3>Dica: Pluralize</h3>
 <p>< % = pluralize(@posts.errors.count, "error") %></p>
@@ -32,7 +43,38 @@
 
 <p>Dica: LOGOTIPO < %= link_to image_tag('logo.svg'), root_path, id: "logo" %></p>
 
+<p>DATAS:  invoice.date.strftime("%d/%m/%Y") fica: 9/12/2014 ou ("%d-%m%Y") fica: 9-12-2014</p>
 
+<p>Dica: salvar arquivos .as_json , .as_xml,  .as_yaml</p>
+
+<h3>VALORES:  price:decimal  e view: number_to_currenty(price)</h3>
+	<p>V-34  CALCULOS</p>
+	<p>< %= running_total = 0 %></p>
+	<p>< %= @loop do purchases %> </p>
+	<p>< %= purchase.quantity %></p>
+	<p>< %= purchase.price  %></p>
+	<p>< %= number(purchase.quantity * purchase.price  ) %></p>
+
+	<p>< % running_total = running_total + (purchase.quantity * purchase.price  ) %></p>
+
+	<h5>rever isto</h5>
+
+
+
+
+	<hr>
+<p> DICA:  INTE4POLACAO -  " #{post.title}  -  #{post.user_id} "  </p>
+<h3>HELPERS</h3>
+<P>def pegar_sexo(sex - este aqui é o campo db)  <br>
+	if sex == 'M'  <Br>
+	 'Masculino'  <br>
+	else   			<Br>
+		'Feminino'  <br>
+  end <br>
+
+ </p>
+ <p>Na view: -->  <code># { pegar_sexo(post.sex) }</code></p>
+	
 <h3>Routes - Design Url's</h3>
 <div class="well">
 		<h3>Para Devise</h3>
@@ -88,12 +130,21 @@
 
 
 <h1><code>Verificar</code> Flash.each para alerts</H1>
+
+<div class="well">
 		<p> < % flash.each do |name,msg| %><br>
 		< %= content_tag(:div, msg, class: "alert alert-#{name}") % ><br>
 		< % end % >
 		</p>
 
 
+		<h3>OU</h3>
+
+		<p> < %= flash.each do |name, msg| %> <Br>
+			= content_tag :div , msg, class: "alert alert-info"
+			</p>
+
+</div>
 	
 	
 		<h1>Ex. aplicacao NoteNote</h1>

@@ -3,20 +3,27 @@
 
 
 <h1><%= @post.title %></h1>
+<% if @post.done == true %>
+		<h3 class="concluido">Post Concluido</h3>
+	<% end %>
+<%= image_tag @post.image.thumb('400x200#').url , class: "thumbnail" if @post.image_stored? %>
 <h3><%= @post.description %></h3>
 <h3><%= @post.user.email %></h3>
+<h3><%= @post.done %></h3>
+<hr>
 
 <% if current_user = @post.user_id %>
 	<%= link_to 'Delete', post_path(@post), method: :delete, data: { confirm: "Are You Sure?" }, class: "btn btn-danger" %>
 	<%= link_to 'Edit', edit_post_path(@post), class: "btn btn-default" %>
 
 	
+	
 
 	<% end %>
 
 <%= link_to 'Back', posts_path , class: "btn btn-default" %>
 
-
+<hr>
 	<h3>Opiniao Like/Dislike</h3>
 	<div class="btn group">
 			
@@ -31,7 +38,7 @@
 			<% end %>
 	</div>
 
- 	
+ <hr>
 
 
 
@@ -52,7 +59,7 @@
 	<%= render 'comments/form' %>
 	<hr>
 
-<hr>
+
 <h3>Veja Comentarios</h3>
 <h3><%= pluralize(@post.comments.count, "Comment") %></h3>
 

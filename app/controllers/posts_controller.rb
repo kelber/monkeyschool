@@ -10,6 +10,10 @@ class PostsController < ApplicationController
 		@comment = Comment.where(post_id: @post)
 		# se quiser selecionar somente post do usuario
 			# @posts = Post.where(user_id: current_user)
+
+		@feito = Post.where(done: true)
+		@aberto = Post.where(done: false)
+
 	end
 
 
@@ -70,9 +74,6 @@ class PostsController < ApplicationController
 					
 
 
-
-
-
 	private
 
 	def find_post
@@ -81,7 +82,7 @@ class PostsController < ApplicationController
 	end
 
 	def post_params
-		params.require(:post).permit(:title, :description)
+		params.require(:post).permit(:title, :description, :done, :image)
 	end
 
 
