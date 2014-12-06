@@ -28,7 +28,6 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     acts_as_votable (0.10.0)
-    addressable (2.3.6)
     arel (5.0.1.20140414130214)
     bcrypt (3.1.9-x86-mingw32)
     bootstrap-sass (3.3.1.0)
@@ -48,10 +47,6 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
-    dragonfly (1.0.7)
-      addressable (~> 2.3)
-      multi_json (~> 1.0)
-      rack
     erubis (2.7.0)
     execjs (2.2.2)
     font-awesome-sass (4.2.2)
@@ -97,7 +92,7 @@ GEM
       activesupport (= 4.1.6)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rake (10.4.0)
+    rake (10.4.2)
     rdoc (4.1.2)
       json (~> 1.4)
     responders (1.1.2)
@@ -147,7 +142,6 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.1.0)
   coffee-rails (~> 4.0.0)
   devise
-  dragonfly (~> 1.0.7)
   font-awesome-sass
   jbuilder (~> 2.0)
   jquery-rails
