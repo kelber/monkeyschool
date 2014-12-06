@@ -13,7 +13,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 
 
-group :development do
+group :development , :test  do
 	gem 'tzinfo-data', platforms: [:mingw, :mswin]
 	gem 'sqlite3'
 end
@@ -21,7 +21,7 @@ end
 group :production do
 	gem 'pg'
 	gem 'rails_12factor'
-	gem 'unicorn', '~> 4.8.3'
+	gem 'unicorn'
 end
 
 
