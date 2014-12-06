@@ -6,7 +6,7 @@
 <% if @post.done == true %>
 		<h3 class="concluido">Post Concluido</h3>
 	<% end %>
-<%= image_tag @post.image.thumb('400x200#').url , class: "thumbnail" if @post.image_stored? %>
+
 <h3><%= @post.description %></h3>
 <h3><%= @post.user.email %></h3>
 <h3><%= @post.done %></h3>

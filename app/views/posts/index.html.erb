@@ -64,7 +64,9 @@
 		<div class="box panel panel-default">
 		<div al>
 		<div id="head">
-			<%= image_tag post.image.thumb('400x200#').url , class: "thumbnail" if post.image_stored? %>
+			
+				
+
 				<h3 align="center"><%= link_to post.title , post %></h3>
 		</div>
 			<p class="text-center"><%= time_ago_in_words(post.created_at) %></p>
