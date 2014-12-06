@@ -15,6 +15,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 group :production do
 	gem 'pg'
+	gem 'rails_12factor'
 end
 
 
@@ -28,3 +29,6 @@ gem 'dragonfly', '~> 1.0.7'
 
 gem 'acts_as_votable', '~> 0.10.0'
 
+
+
+ruby "2.1.4"
