@@ -91,30 +91,28 @@
 
 
 		<h1>FILTERS --> Selecionando por categoria</h1>
-			<h3>Exemplo JOB</h3>
+			<h3>Exemplo JOB BOARD</h3>
 
 		<div class="well">
 		<H4>1 - Criar category </H4>
 			<p>rails g scaffold category  name:string</p>
-			<p>2 - add_category_id_to_jobs  category_id:integer</p>
+			<p>2 - add_category_id_to_jobs  <code>category_id:integer</code></p>
 			<p>3- Criar associações Model</p>
 			<p>4- Strong Params - :category_id</p>
 
 		<p><kbd>_form</kbd></p>
 			<p><code>< % f.collection_select :category_id, Category.all, :id, :name, { include_blank: true  ou prompt: "Choose your category" }</code> %></p>
 
-			<p>No header ou layouts/application</p>
-			<p>< %= Category.all.each do |category| %></p>
-			<p>< %= link_to category.name, indexOuoutro_path(category: category.name)
+			<p>No header ou layouts/application ou _cabecalho(partial:)</p>
 
-
-		<p>< %= @categories.each do |category| %></p>
-		<p>< %= link_to category.name , pagina_path(category:  category.name)</p>
-		<p>< % end %></p>
+					<p>< %=<code>Category.all</code>.each do |category| %></p>
+					<p>< %= link_to category.name , pagina_path(category:  category.name)</p>
+					<p>< % end %></p>
 
 		<p><kbd>Jobs controller</kbd></p>
 		<p>def index <br>
-			if params[:category].blank?  <br>
+				@categories = Category.all<br>
+			   if params[:category].blank?  <br>
 					@jobs = Job.all   <br>
 			else  <br>
 					@category_id = Category<code>.find_by</code>(name: params[:category]).id  <br>
@@ -134,6 +132,19 @@
 			<p>validates :score, numericality:  true</p>
 			<p>validates :username, format: { with: /^[\w]$/} , message: "Username only letters and no ... space"</p>
 	</div>
+
+
+	<h3>Validando Email</h3>
+		<div class="well">
+		<p>validates :profile_name, presence: true, <br>
+                           uniqueness: true,		<br>
+                           format:  {						<br>
+                             with: /[a-ZA-Z0-9_-]+/,<br>
+                           }										<br>
+    </p>
+		</div>
+
+
 
 
 
