@@ -89,7 +89,7 @@ end
 <h3>Agora Vamos para gem Devise</h3>
 
 <div class="well">
-<p><kbd>Seguir a gem --> obs para Strong params Sanitizer</kbd></p>
+<h1><kbd>Seguir a gem --> obs para Strong params Sanitizer</kbd></h1>
 <p>rails g devise:install</p>
 <p>rails generate devise User</p>
 <p>config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }</p>
@@ -276,6 +276,12 @@ def new<Br>
 		</div>
 
 
+		<h1>Nested Definitivo</h1>
+			<h3>Ex. Estado , Cidades</h3>
+			
+
+
+
 		<h3>Gem:  acts_as_votable </h3>
 			<div class="well">
 			<p>rails g acts_as_votable:migration</p>
@@ -339,7 +345,7 @@ def new<Br>
 			<p>rails g migration add_category_id_to_post  category_id:integer</p>
 			<p>Ajustar no associations model</p>
 			<p><kbd>View:</kbd></p>
-			<p> < %= f.collection_select :category_id, Category.all, :id, :name, { prompt: "Escolha a Categoria" } % ></p>
+			<p> < %= f.collection_select :category_id, Category.all, :id, :name, { prompt: "Escolha a Categoria" }, class: "form-control" % ></p>
 
 			<p><kbd>Strong Params</kbd>
 			<p>:category_id  no Strong Params</p>

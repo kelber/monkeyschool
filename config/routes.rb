@@ -32,6 +32,9 @@ Rails.application.routes.draw do
   get 'ruby/active_record'
   get 'ruby/email'
   get 'ruby/deploy' 
+  get 'ruby/mapas'
+  get 'ruby/will_paginate'
+  get 'ruby/nested'
 ##############################################################
 # Aplicacao xingaAi
 #

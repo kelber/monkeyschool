@@ -19,7 +19,14 @@ class RubyController < ApplicationController
 	def gems
 	end	
 
-	
+	def mapas
+	end
+
+	def will_paginate
+	end
+
+	def nested
+	end
 	
 
 	

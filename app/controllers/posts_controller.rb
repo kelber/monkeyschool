@@ -1,11 +1,13 @@
 class PostsController < ApplicationController
 
+
+
 	before_action :find_post, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
 	before_action :authenticate_user!, except: [:index,:show]
 
-
+ 
 	def index
-		@posts = Post.all.order("created_at DESC")
+		@posts = Post.order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
 		@comments = Comment.all
 		@comment = Comment.where(post_id: @post)
 		# se quiser selecionar somente post do usuario

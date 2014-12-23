@@ -1,0 +1,104 @@
+<div class="container">
+
+<%= render partial: 'layouts/navbar' %>
+<%= link_to 'Voltar', ruby_index_path, class: "btn btn-default" %>
+	<h1>Mapas</h1>
+	
+	<hr>
+
+
+	   <p>https://github.com/alexreisner/geocoder</p>
+     <p>https://github.com/apneadiving/Google-Maps-for-Rails</p>
+<div class="well">
+
+		<p>gem 'geocoder'</p>
+		<p>gem 'gmaps4rails'</p>
+		<p>bundle</p>
+
+		<p>rails g scaffold  User  title:string  address:string  latitude:float  longitude:float</p>
+		<p><kbd>mode:</kbd></p>
+			<p>geocoded_by :address<br>
+         after_validation :geocode</p>
+         <hr>
+
+    <p>Copiar  div id=map e colar em qualquer lugar no index -- como está </p>
+    <p>Colar 2 linhas javascript no topo da pagina</p>
+    <p>criar novo arquivo na pasta vendor/javascript/underscore.js</p>
+    <p>Colar do -> Ir underscore.js copiar production underscore.js(ex. 1.5.2)</p>
+
+    
+    <p>Asset Pipeline</p>
+    	<p>colar os //requires ....//require tree por ultimo </p>
+
+    <p>colar script no final da pagina</p>
+
+    <p>Reformular Campos</p>
+    <p>< script type="text/javascript">
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+    markers = handler.addMarkers<code>(< %=raw @hash.to_json %>)</code>;
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+  });
+</script>
+</p>
+
+	<p><kbd>Controller:</kbd></p>
+	
+	<p>def index <Br>
+    @users = User.all <br>
+   <p> Adicionar: </p>
+	<p>@hash = Gmaps4rails.build_markers(@users) do |user, marker| <Br>
+    marker.lat user.latitude <Br>
+    marker.lng user.longitude<Br>
+    marker.title user.title    <Br>
+    marker.infowindow user.title  ou user.description... <Br>
+
+   </p>
+   <hr>
+   <h3>Adicionar os campos que se queira trabalhar</h3>
+   <p>Exemplos</p>
+   <p>marker.picture({  "url" => '/logo.png' ,   <br>
+   			"witdh" => 32,  <Br>
+   			"height" => 32 <Br>
+   			 });  <br>
+   </p>
+   <hr>
+
+   <h3>Se precisar usar json</h3>
+   <p> marker.json({ title: => user.title }) </p>
+   <hr>
+
+   <h3>CSS para tela inteira</h3>
+   <p>
+#googlemaps { <br>
+  height: 100%; <br>
+  width: 100%; <br>
+  position:absolute; <br>
+  top: 0; <br>
+  left: 0; <br>
+  z-index: 0; /* Set z-index to 0 as it will be on a layer below the contact form */<br>
+}<br>
+
+#contactform { <br>
+  position: relative; <br>
+ 
+  left: 10px;<br>
+  z-index: 1; /* The z-index should be higher than Google Maps */<br>
+  width: 300px;<br>
+  margin: 60px auto 0;<br>
+  padding: 10px;<br>
+  background: black;<br>
+  height: auto;<br>
+  opacity: .75; /* Set the opacity for a slightly transparent Google Form */ <br>
+  color: white;<br>
+  font-style: bold;<br>
+}<br>
+
+</p>
+
+
+
+</div>
+
+

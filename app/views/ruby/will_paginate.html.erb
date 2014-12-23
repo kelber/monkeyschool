@@ -1,0 +1,87 @@
+<div class="container">
+
+<%= render partial: 'layouts/navbar' %>
+<%= link_to 'Voltar', ruby_index_path, class: "btn btn-default" %>
+	<h1>Will Paginate - Endless Scrolling</h1>	
+	<hr>
+
+	<h1>Endless Scrolling</h1>
+
+
+	<p>gem 'will_paginate', '~> 3.0.7'</p>
+	<p>bundle</p>
+
+	<div class="well">
+			<p><kbd>Seed:Alimentacao automatica</kbd></p>
+			<p>(1..100).each do |i|   <Br>
+		  Post.create!(title: "Lipsum Post #{i}", body: %{   <Br>
+		      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In feugiat purus dapibus fermentum sagittis. Fusce in tempus felis. Phasellus a erat ut lorem lacinia bibendum. Vivamus viverra facilisis neque, in scelerisque urna pharetra vel. Donec a est mauris. Integer eget metus quis eros egestas elementum. Integer bibendum risus hendrerit dapibus tempor. Fusce placerat in orci vitae tincidunt.
+		  }) <Br>
+		end <Br>
+		</p>
+
+		<p><code>rake db:seed</code></p>
+	</div>
+	
+
+
+	<p><kbd>controller:</kbd></p>
+
+	<div class="well">
+			<p> def index <br>
+		    @posts = Post<code>.paginate(:page => params[:page], :per_page => 20)</code> <br>
+		  end
+		  </p>
+
+ </div>
+
+  <p>index.html.erb</p>
+
+  <div class="well">
+		  <p>< div id="posts">  <Br>
+		  < h1>Posts</h1>  <br>
+		  < %= render 'post' %> <code>obs: arq novo , as vezes funciona com @post </code> <Br>
+		  < /div>  <Br>
+		 < %= will_paginate @posts %>  <br>
+	</div>
+
+
+ <p>criar arquivo _post.html.erb</p>
+
+ <div class="well">
+		 <p>< div class="post"> <code>obs id="posts" e class="post"</code> <Br>
+		  < h2>< %= post.title %></h2> <Br>
+		  < p>< %= post.body %></p> <br>
+		  < /div> <br>
+	</div>
+
+ 
+ <p>no application.js</p>
+ 
+ <div class="well">
+ 			<p>$(document).ready(function() {  <br>
+  if ($('.pagination').length) {			 <br>
+    $(window).scroll(function() {				 <br>
+      var url = $('.pagination .next_page').attr('href');		 <br>
+      if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 50) {   <br>
+        $('.pagination').text("Please Wait...");    <br>
+        return $.getScript(url);   <br>
+      }    <br>
+    });    <br>
+    return $(window).scroll();   <br>
+  }    <br>
+});    <br>
+ </div>
+
+
+ <p>Criar arquivo  index.js.erb na propria pasta <code>posts</code></p>
+
+ <div class="well">
+ 		<p>$(' #posts').append('< %= escape_javascript render(@posts) %>');
+			< % if @posts.next_page %>
+			$('.pagination').replaceWith('< %= escape_javascript will_paginate(@posts) %>');
+			< % else %>
+			$('.pagination').remove();
+			< % end %>
+			< % sleep 1 %>
+ </div>

@@ -1,0 +1,103 @@
+<div class="container">
+
+<%= render partial: 'layouts/navbar' %>
+<%= link_to 'Voltar', ruby_index_path, class: "btn btn-default" %>
+	<h1>Nested</h1>
+	<hr>
+
+	<h1>Ex: Estado -> Cidades</h1>
+	<p>rails g scaffold estado  name:string</p>
+	<p>rails g model cidade name:string <code>estado_id:integer</code></p>
+
+	<h3>Routes</h3>
+	<div class="well">
+		<p>resources :estados <code> do </code></p>
+			<p>resources :cidades <code>,except: [:pg's q nao existem] ,dependent: destroy</code></p>
+		<p>end</p>
+		</div>
+
+		<h4>Criar Associações: belongs_to , has_many</h4>
+
+		<h3>Child - Controller ou CidadesController</h3>
+			<div class="well">
+			<p>Ajustar <code>private</code>Quem é @estado ? , @cidade ? ,e criar before_filter</p>
+			<p>def find_cidade e cidade_params</p>
+			<p>def set_estado = Estado.find(params[:estado_id])</p>
+
+			<h3><kbd>Controller</kbd></h3>
+				<p>before_filter :find_cidade, only: [:destroy]</p>
+				<p>before_filter :set_estado, except: [:index, :show, :destroy]</p>
+
+				<p>def new</p>
+				<p>@cidade = Cidade.new</p>
+				<p>end</p>
+
+				<p>def create</p>
+				<p>@cidade = Cidade.new(cidade_params)</p>
+				<p>@cidade.estado_id = @estado.id</p>
+				<p>if @cidade.save</p>
+				<p>flash[:notice] = "Cadastrado com sucesso"</p>
+				<p>redirect_to @estado			</p>
+					<p>else</p>
+						<p>flash[:error] = "errado"</p>
+				<p>		render 'new'</p>
+					<p>	end</p>
+				<p>	end</p>
+
+					<p>def destroy</p>
+					<p>	@estado = Estado.find(params[:estado_id])</p>
+					<p>	# @cidade = Cidade.find(params[:id])</p>
+					<p>	if @cidade.destroy</p>
+						<p>	redirect_to @estado, notice: "Apagado com Sucesso"</p>
+						<p>else</p>
+						<p>	render @estados</p>
+						<p>end</p>
+					<p>end</p>
+
+
+					<p><code>private</code></p>
+					<p>def find_cidade</p>
+					<p>	@cidade = Cidade.find(params[:id])</p>
+					<p>end</p>
+
+					<p>def cidade_params</p>
+					<p>	params.require(:cidade).permit(:name, :estado_id)</p>
+					<p>end</p>
+
+
+					<p>def set_estado</p>
+					<p>	@estado = Estado.find(params[:estado_id])</p>
+					<p>end</p>
+
+
+			</div>
+
+			<h3>Estado/Show - View:</h3>
+			<div class="well">
+
+			<p>
+			< %= link_to 'Cadastrar Cidade', new_estado_cidade_path(<code>@estado ,pois está no show</code>)</p>
+
+			<h3>Listagem de Cidades abaixo</h3>
+
+			<p>< %= @estado.<code>cidadeS</code>.each do |cidade| %></p>
+			<p>< %= cidade.name %></p>
+			<p>< % end %></p>
+
+			<kbd>deletar item</kbd>
+			<p>
+				< %= link_to 'Deletar', estado_cidade_path(<code>@estado, c</code>), method: :delete, data: { confirm: "Certeza?" } %>
+			</p>
+			<hr>
+			<kbd>Obs:</kbd>
+			<p>Pode-se definir também listagem usando: <code>@cidades</code>.each do |cidade| </p>
+			<p>para isso...</p>
+			<p>EstadosController</p>
+			<p>def <code>show</code></p>
+			<p> @cidades = Cidade.<code>where</code>(estado_id: <code>sem virgula</code>@estado_id).order....</p>
+			<p>end</p>
+
+
+
+
+			</p>

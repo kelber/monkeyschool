@@ -26,24 +26,52 @@
 					<p>Routes configuradas</p>
 					<p>group :production do <Br>
 							gem 'pg'<br>
+							gem 'rails_12factor'<br>
 						end</br>
 
 						group :development do <br>
 							gem 'sqlite3'  <br>
 							end <br>
+
+							<code>No final:</code>
+							<p>ruby "2.0.0"</p>
 					</p>
 
 
+					<p>
+			<p>OBS: caso precise gerar chave</p>
+			<p>ssh-keygen -T rsa -C "email"</p>
+			<p>R. ver success & http: resultado</p>
 			<div class="well">
+				<kbd>prompt:</kbd>
+				<p>bundle install para gems</p>
+				<p><kbd>Github subir</kbd></p>
 
+				<p>heroku keys:add</p>
 				<p>heroku login</p>
 				<p>heroku create <strong>nome_aplicacao</strong></p>
 
 				<p>git push heroku master  --> ver: git push -U master</p>
-				<p><i>heroku keys:add ~/.ssh/id_rsa.pub</i></p>
+				<p>heroku run rake db:migrate</p>
+				<p>heroku ps:scale web=1</p>
+				<p>Obs: 1 Faixa do B.D gratuito</p>
+			</div>
+
+
+
+
+			<h1>Jackson P</h1>
+			<h3>Heroku Linode e DigitalOcean</h3>
+				<div class="well">
+				
+						<p>Caso nao funcione</p>
+						<p> gem 'unicorn' no :production</p>
+						<p>bundle</p>
+						<p>criar config/unicorn.rb e colar texto </p>
+						<p>criar arq Procfile /raiz</p>
+			</div>
+
+
 
 				<h3>Atualizar</h3>
 				<p>git push heroku master</p>
-
-
-			</div>
